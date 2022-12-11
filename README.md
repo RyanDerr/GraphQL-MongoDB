@@ -6,9 +6,12 @@
 3. Create a database called `BookStore` with two containers called `book` and `author`.
 4. Run `mvn clean install` (Requires Maven Setup) to install and compile all necessary packages and files.
 5. Run the GraphQLAPISpringTestApplication and set active profile(s) to `local`.
-6. You can now query and mutate the database with this microservice on http://localhost:8080/graphql
+6. Request can be sent and checked with [Insomnia](https://insomnia.rest/) with samples in the `SampleInsomniaRequests/` directory that can be imported into insomnia. 
+7. You can now query and mutate the database with this microservice on http://localhost:8080/graphql
 
-## Install Docker Desktop
+
+
+## Create And Run GraphQL Microservice and MongoDB On Docker
 1. Install docker desktop through the DockerHub [here](https://www.docker.com/products/docker-desktop/).
 2. Install/Run the mongodb docker container existing on port 8082 (The MongoDB container runs on port 27017 for any containerized applications run locally.)
 `docker run --name mongodb -d -p 8082:27017 mongo`
