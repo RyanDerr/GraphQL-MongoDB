@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -36,6 +37,15 @@ public class Query implements GraphQLQueryResolver {
         throw new GraphQLException("Could Not Find Provided Author With Id [" + id + "]");
     }
 
+    public Iterable<Author> findAuthorsByLastName(String lastName) throws GraphQLException {
+        List<Author> authors = authorRepository.getAuthorByLastNameIsIgnoreCase(lastName);
+
+        if(authors.isEmpty()) {
+            throw new GraphQLException("Could Not Find Author(s) With Name [" + lastName + "]");
+        }
+        return authors;
+    }
+
     public Iterable<Book> findAllBooks() {
         return bookRepository.findAll();
     }
@@ -47,6 +57,15 @@ public class Query implements GraphQLQueryResolver {
            return optionalBook.get();
        }
         throw new GraphQLException("Could Not Find Provided Author With Id [" + id + "]");
+    }
+
+    public Iterable<Book> findBooksByTitle(String title) throws GraphQLException {
+        List<Book> books = bookRepository.getBookByTitleIsIgnoreCase(title);
+
+        if(books.isEmpty()) {
+            throw new GraphQLException("Could Not Find Books(s) With Title [" + title + "]");
+        }
+        return books;
     }
 
     public long countAuthors() {
