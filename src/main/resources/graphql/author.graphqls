@@ -8,6 +8,7 @@ type Author {
 #Root
 type Query {
     findAllAuthors: [Author]!
+    findAuthorById(id: ID!): Author!
     countAuthors: Int!
 }
 

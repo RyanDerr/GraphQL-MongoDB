@@ -6,10 +6,12 @@ import com.graphqljava.tutorial.bookDetails.mongoDB.entity.Author;
 import com.graphqljava.tutorial.bookDetails.mongoDB.entity.Book;
 import com.graphqljava.tutorial.bookDetails.mongoDB.repository.AuthorRepository;
 import com.graphqljava.tutorial.bookDetails.mongoDB.repository.BookRepository;
+import graphql.GraphQLException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.FileNotFoundException;
 import java.util.Optional;
 
 @Component
@@ -52,7 +54,7 @@ public class Mutation implements GraphQLMutationResolver {
         return true;
     }
 
-    public Book updateBook(String id, String title, String description) throws Exception {
+    public Book updateBook(String id, String title, String description) throws GraphQLException {
         Optional<Book> optionalBook = bookRepository.findById(id);
 
         if (optionalBook.isPresent()) {
@@ -70,6 +72,6 @@ public class Mutation implements GraphQLMutationResolver {
             return book;
         }
 
-        throw new Exception("Could Not Find Provided Book To Update!");
+        throw new GraphQLException("Could Not Find Provided Book To Update!");
     }
 }
