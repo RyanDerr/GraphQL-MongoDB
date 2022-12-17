@@ -9,6 +9,7 @@ type Author {
 type Query {
     findAllAuthors: [Author]!
     findAuthorById(id: ID!): Author!
+    findAuthorsByLastName(lastName: String!): [Author]
     countAuthors: Int!
 }
 

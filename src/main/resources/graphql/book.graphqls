@@ -8,6 +8,7 @@ type Book {
 extend type Query {
     findAllBooks: [Book]!
     findBookById(id: ID!): Book!
+    findBooksByTitle(title: String!): [Book]
     countBooks: Int!
 }
 
