@@ -32,5 +32,5 @@ jobs:
         context: .
         repository: ${{secrets.DOCKER_REPO}}
         push: true
+        tag: $(date '+%Y%m%d-%H%M%S')
         tag_with_refs: latest
-        additional_tag: $(date '+%Y%m%d-%H%M%S')
