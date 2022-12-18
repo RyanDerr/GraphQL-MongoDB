@@ -3,8 +3,6 @@ name: Build And Push Docker Image To DockerHub
 on:
   push:
     branches: [ "main" ]
-    tags:
-      - "v*"
 
 jobs:
 
@@ -28,10 +26,11 @@ jobs:
        username: ${{secrets.DOCKER_USERNAME}}
        password: ${{secrets.DOCKER_TOKEN}}
     - name: Docker Build and Push To DockerHub
+      id: build-and-push
       uses: docker/build-push-action@v2
       with:
         context: .
         repository: ${{secrets.DOCKER_REPO}}
         push: true
-        tag_with_refs: true
-        additional_tags: latest
+        tag_with_refs: latest
+        additional_tag: $(date '+%Y%m%d-%H%M%S')
