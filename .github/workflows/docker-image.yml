@@ -31,6 +31,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
+        repository: ${{secrets.DOCKER_REPO}}
         push: true
         tag_with_refs: true
         additional_tags: latest
