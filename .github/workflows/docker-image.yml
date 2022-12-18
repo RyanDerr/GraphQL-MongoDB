@@ -1,4 +1,4 @@
-name: CI
+name: Build And Push Docker Image To DockerHub
 
 on:
   push:
@@ -30,4 +30,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: jrd3064/graphql-mongodb:latest, jrd3064/graphql-mongodb:${{github.run_id}}
+        tags: ${{secrets.DOCKER_REPO}}:latest, ${{secrets.DOCKER_REPO}}:${{github.run_id}}
