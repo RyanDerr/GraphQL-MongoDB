@@ -1,4 +1,5 @@
 FROM openjdk:19-jdk-alpine
+VOLUME /tmp
 MAINTAINER Ryan Derr
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
