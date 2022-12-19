@@ -1,6 +1,7 @@
 package com.graphqljava.tutorial.bookDetails.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.graphqljava.tutorial.bookDetails.exceptions.NotFoundException;
 import com.graphqljava.tutorial.bookDetails.mongoDB.entity.Author;
 import com.graphqljava.tutorial.bookDetails.mongoDB.repository.AuthorRepository;
 import graphql.GraphQLException;
@@ -20,13 +21,13 @@ public class AuthorQuery implements GraphQLQueryResolver {
         return authorRepository.findAll();
     }
 
-    public Author findAuthorById(String id) throws GraphQLException {
-        Optional<Author> optionalAuthor =  authorRepository.findById(id);
+    public Author findAuthorById(String id) {
+        return authorRepository.findById(id).orElseThrow(() -> new NotFoundException("Could Not Find Provided Author With Id [" + id + "]"));
 
-        if(optionalAuthor.isPresent()) {
-            return optionalAuthor.get();
-        }
-        throw new GraphQLException("Could Not Find Provided Author With Id [" + id + "]");
+//        if(optionalAuthor.isPresent()) {
+//            return optionalAuthor.get();
+//        }
+//        throw new GraphQLException("Could Not Find Provided Author With Id [" + id + "]");
     }
 
     public Iterable<Author> findAuthorsByLastName(String lastName) throws GraphQLException {
